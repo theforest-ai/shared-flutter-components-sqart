@@ -1,4 +1,4 @@
-# sqart_flutter_components
+# shared_flutter_components_sqart
 
 A new Flutter project.
 
@@ -15,4 +15,4 @@ For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 # sqart-flutter-components
-# shared-flutter-components-sqart
+# shared_flutter_components_sqart
