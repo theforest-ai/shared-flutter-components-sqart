@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:pattern_formatter/pattern_formatter.dart';
-import 'package:shared-flutter-components-sqart/constants/color.constant.dart';
-import 'package:shared-flutter-components-sqart/constants/styles.constant.dart';
+import 'package:shared_flutter_components_sqart/constants/color.constant.dart';
+import 'package:shared_flutter_components_sqart/constants/styles.constant.dart';
 
 class StandardMoneyBorderInput extends StatefulWidget {
   final String? labelText;

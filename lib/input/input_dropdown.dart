@@ -1,7 +1,7 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
-import 'package:shared-flutter-components-sqart/constants/color.constant.dart';
-import 'package:shared-flutter-components-sqart/constants/styles.constant.dart';
+import 'package:shared_flutter_components_sqart/constants/color.constant.dart';
+import 'package:shared_flutter_components_sqart/constants/styles.constant.dart';
 
 class DropdownInput extends StatelessWidget {
   final List<String>? data;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:shared-flutter-components-sqart/constants/color.constant.dart';
-import 'package:shared-flutter-components-sqart/constants/styles.constant.dart';
+import 'package:shared_flutter_components_sqart/constants/color.constant.dart';
+import 'package:shared_flutter_components_sqart/constants/styles.constant.dart';
 
 import '../loading/loading.dart';
 import 'input_card_formatter.dart';

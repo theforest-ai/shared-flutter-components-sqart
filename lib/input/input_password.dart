@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shared-flutter-components-sqart/constants/color.constant.dart';
-import 'package:shared-flutter-components-sqart/constants/styles.constant.dart';
+import 'package:shared_flutter_components_sqart/constants/color.constant.dart';
+import 'package:shared_flutter_components_sqart/constants/styles.constant.dart';
 
 class PasswordInput extends StatelessWidget {
   final String? initialValue;
