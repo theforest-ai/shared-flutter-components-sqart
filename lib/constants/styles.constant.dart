@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:shared-flutter-components-sqart/constants/color.constant.dart';
+import 'package:shared_flutter_components_sqart/constants/color.constant.dart';
 
 // Headings
 Text headingOne(String text, Color color, {FontWeight? fontWeight}) {

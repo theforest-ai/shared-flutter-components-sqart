@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shared-flutter-components-sqart/constants/color.constant.dart';
+import 'package:shared_flutter_components_sqart/constants/color.constant.dart';
 
 Widget Function(BuildContext, Object, StackTrace?)? handleFlagImageError({required String? country}) {
   if (country != "") {

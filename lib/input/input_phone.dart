@@ -1,7 +1,7 @@
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:shared-flutter-components-sqart/main.dart';
+import 'package:shared_flutter_components_sqart/main.dart';
 
 class PhoneInput extends StatelessWidget {
   final FocusNode? focusNode;
