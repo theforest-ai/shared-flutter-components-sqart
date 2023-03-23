@@ -1,4 +1,4 @@
-library shared-flutter-components-sqart;
+library shared_flutter_components_sqart;
 
 export './text.dart';
 export './space.dart';

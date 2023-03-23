@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:shared-flutter-components-sqart/constants/color.constant.dart';
+import 'package:shared_flutter_components_sqart/constants/color.constant.dart';
 
 class PhotoInput extends StatelessWidget {
   final Function()? callback;
