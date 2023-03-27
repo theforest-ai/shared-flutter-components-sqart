@@ -15,6 +15,7 @@ class SearchInput extends StatelessWidget {
     required this.onSubmit,
     this.onChanged,
     this.onTap,
+    this.cursorColor
   }) : super(key: key);
 
   final double? radius;
@@ -28,6 +29,7 @@ class SearchInput extends StatelessWidget {
   final Function()? onRemoveText;
   final Function()? onTap;
   final Function(String)? onChanged;
+  final Color? cursorColor;
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +42,7 @@ class SearchInput extends StatelessWidget {
         onChanged: onChanged ?? (v) {},
         controller: controller,
         focusNode: focusNode,
+        cursorColor: cursorColor,
         decoration: InputDecoration(
           contentPadding: const EdgeInsets.all(0),
           focusedBorder: OutlineInputBorder(
