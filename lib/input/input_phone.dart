@@ -70,7 +70,7 @@ class PhoneInput extends StatelessWidget {
                 enabled: true,
                 controller: phoneNumberController,
                 keyboardType: TextInputType.phone,
-                inputFormatters: [LengthLimitingTextInputFormatter(15)],
+                inputFormatters: [LengthLimitingTextInputFormatter(15),FilteringTextInputFormatter.allow(RegExp(r'[0-9]'))],
                 obscureText: false,
                 focusNode: focusNode,
                 decoration: InputDecoration(
