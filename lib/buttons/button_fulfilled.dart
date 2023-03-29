@@ -40,7 +40,7 @@ class FullFilledButton extends StatelessWidget {
               width: isOutline! ? 1.0 : 0.0,
               color: isOutline! ? borderColor ?? squareartNeutral.v100 : borderColor ?? squareartNeutral.v100,
             ),
-            primary: isOutline! ? squareartNeutral.v0 : color ?? squareartNeutral.v100,
+            primary:  color ?? squareartNeutral.v100,
             fixedSize: Size(width * .9, 40),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8.0),
