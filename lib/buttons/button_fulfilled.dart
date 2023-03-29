@@ -10,6 +10,7 @@ class FullFilledButton extends StatelessWidget {
   final bool? isDisabled;
   final bool? isLoading;
   final Color? color;
+  final Color? borderColor;
   final Color? textColor;
   bool? isOutline = false;
   final EdgeInsets? padding;
@@ -21,6 +22,7 @@ class FullFilledButton extends StatelessWidget {
     this.isLoading = false,
     this.isOutline,
     this.color,
+    this.borderColor,
     this.textColor,
     this.padding,
   }) : super(key: key);
@@ -36,7 +38,7 @@ class FullFilledButton extends StatelessWidget {
             visualDensity: const VisualDensity(vertical: -2, horizontal: 1),
             side: BorderSide(
               width: isOutline! ? 1.0 : 0.0,
-              color: isOutline! ? color ?? squareartNeutral.v100 : color ?? squareartNeutral.v100,
+              color: isOutline! ? borderColor ?? squareartNeutral.v100 : borderColor ?? squareartNeutral.v100,
             ),
             primary: isOutline! ? squareartNeutral.v0 : color ?? squareartNeutral.v100,
             fixedSize: Size(width * .9, 40),
