@@ -141,7 +141,7 @@ class _StandardTextInputState extends State<StandardTextInput> {
               }
             },
             focusNode: widget.focusNode,
-            maxLines: widget.maxLines,
+            maxLines: widget.maxLines ?? 1,
             decoration: widget.icon != null || widget.info != null
                 ? InputDecoration(
                     suffixIcon: isLoading
