@@ -24,7 +24,7 @@ class StandardTextInput extends StatefulWidget {
   final Function(String)? onChanged;
   final Function(String)? onSubmitted;
   final String? Function(String?)? validator;
-  final bool? showError;
+  final bool showError;
   final Function()? ontap;
   final Function()? ontapIcon;
   final bool? denySpace;
@@ -56,7 +56,7 @@ class StandardTextInput extends StatefulWidget {
     this.radius,
     this.maxInput,
     this.validator,
-    this.showError,
+    this.showError = false,
     this.ontap,
     this.showErrorBorder,
     this.ontapIcon,
@@ -188,9 +188,9 @@ class _StandardTextInputState extends State<StandardTextInput> {
                     hintStyle: hintStyle(),
                     focusedBorder: OutlineInputBorder(
                         borderSide: widget.hideBorder ?? false ? BorderSide.none : const BorderSide(color: squareartSecondary100)),
-                    errorText: widget.showError == null && isFieldEmpty
+                    errorText: widget.showError  && isFieldEmpty
                         ? 'Field cannot be empty.'
-                        : widget.showError != null && widget.showError!
+                        : widget.showError  && widget.showError
                             ? isFieldEmpty
                                 ? 'Field cannot be empty.'
                                 : null
