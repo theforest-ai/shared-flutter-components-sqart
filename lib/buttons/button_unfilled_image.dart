@@ -8,6 +8,8 @@ class UnfilledImageButton extends StatelessWidget {
   final GestureTapCallback? onPressed;
   final bool? isDisabled;
   final Color? textColor;
+  final FontWeight? fontWeight;
+
   final bool? isAuthButton;
   final bool? isRobotoFont;
   final String? img;
@@ -19,6 +21,7 @@ class UnfilledImageButton extends StatelessWidget {
     required this.onPressed,
     required this.isDisabled,
     this.textColor,
+    this.fontWeight,
     this.isAuthButton,
     this.isRobotoFont,
     this.img,
@@ -44,8 +47,8 @@ class UnfilledImageButton extends StatelessWidget {
           horizontalXSmallSpace,
           isAuthButton ?? false
               ? isRobotoFont ?? false
-                  ? customTextRoboto(buttonText!, 14, FontWeight.w600, textColor ?? squareartNeutral.v100)
-                  : customText(buttonText!, 14, FontWeight.w600, textColor ?? squareartNeutral.v100)
+                  ? customTextRoboto(buttonText!, 14, fontWeight??FontWeight.w600, textColor ?? squareartNeutral.v100)
+                  : customText(buttonText!, 14, fontWeight??FontWeight.w600, textColor ?? squareartNeutral.v100)
               : Text(buttonText!, maxLines: 1, style: normalText(textColor != null ? textColor! : squareartNeutral.v100)),
         ],
       ),
