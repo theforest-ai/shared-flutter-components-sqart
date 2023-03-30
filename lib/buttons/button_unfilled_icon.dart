@@ -13,6 +13,7 @@ class UnfilledIconButton extends StatelessWidget {
   final double? borderWidth;
   final Color? borderColor;
   final bool? isAuthButton;
+  final FontWeight? fontWeight;
   const UnfilledIconButton({
     Key? key,
     required this.buttonText,
@@ -23,6 +24,7 @@ class UnfilledIconButton extends StatelessWidget {
     this.borderColor,
     this.suffixWidget,
     required this.onPressed,
+    this.fontWeight,
     required this.isDisabled,
     this.isAuthButton,
   }) : super(key: key);
@@ -48,7 +50,7 @@ class UnfilledIconButton extends StatelessWidget {
           ),
           horizontalXSmallSpace,
           isAuthButton ?? false
-              ? customText(buttonText!, 14, FontWeight.w600, squareArtPrimary.v120)
+              ? customText(buttonText!, 14, fontWeight??FontWeight.w600, squareArtPrimary.v120)
               : Text(buttonText!, maxLines: 1, style: normalText(textColor ?? squareartNeutral.v100)),
           horizontalXSmallSpace,
           if (suffixWidget != null) suffixWidget!
