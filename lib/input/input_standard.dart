@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:shared_flutter_components_sqart/constants/color.constant.dart';
 import 'package:shared_flutter_components_sqart/constants/styles.constant.dart';
-
-import '../loading/loading.dart';
-import 'input_card_formatter.dart';
+import 'package:shared_flutter_components_sqart/main.dart';
 
 class StandardTextInput extends StatefulWidget {
   final String? labelText;
@@ -34,6 +33,8 @@ class StandardTextInput extends StatefulWidget {
   final bool? hideBorder;
   final TextCapitalization? textCapitalization;
   final TextAlign? textAlign;
+  final bool? showErrorBorder;
+  final double? errorBorderWidthPercentage;
 
   const StandardTextInput({
     Key? key,
@@ -57,12 +58,14 @@ class StandardTextInput extends StatefulWidget {
     this.validator,
     this.showError,
     this.ontap,
+    this.showErrorBorder,
     this.ontapIcon,
     this.denySpace,
     this.iconColor,
     this.forceCaps,
     this.hideBorder,
     this.textAlign,
+    this.errorBorderWidthPercentage,
     this.textCapitalization,
   }) : super(key: key);
 
@@ -84,6 +87,12 @@ class _StandardTextInputState extends State<StandardTextInput> {
   List<TextInputFormatter> formatted = [];
   @override
   Widget build(BuildContext context) {
+    if (widget.showErrorBorder ?? false) {
+      assert(widget.width != null);
+      assert(widget.errorBorderWidthPercentage != null);
+      assert(widget.errorBorderWidthPercentage! <= 1 && widget.errorBorderWidthPercentage! >= 0);
+    }
+
     formatted.add(LengthLimitingTextInputFormatter(widget.maxInput != 0 ? widget.maxInput : 100));
     if (widget.denySpace ?? false) {
       formatted.add(FilteringTextInputFormatter.deny(RegExp(r'\s')));
@@ -94,117 +103,129 @@ class _StandardTextInputState extends State<StandardTextInput> {
     if (widget.forceCaps ?? false) {
       formatted.add(UpperCaseTextFormatter());
     }
-    return SizedBox(
-      height: widget.height ?? 40,
-      width: widget.width,
-      child: TextFormField(
-        onTap: widget.ontap ?? () {},
-        textAlign: widget.textAlign ?? TextAlign.start,
-        validator: widget.validator == null ? null : widget.validator!,
-        enabled: widget.isDisabled == null ? true : !widget.isDisabled!,
-        keyboardType: widget.type,
-        textCapitalization: widget.textCapitalization ?? TextCapitalization.none,
-        controller: widget.controller,
-        inputFormatters: formatted,
-        obscureText: false,
-        textInputAction: TextInputAction.done,
-        onChanged: (val) {
-          if (val.isEmpty) {
-            setState(() {
-              isFieldEmpty = true;
-            });
-          } else {
-            setState(() {
-              isFieldEmpty = false;
-            });
-          }
-          if (widget.onChanged != null) {
-            widget.onChanged!(val);
-          }
-        },
-        onFieldSubmitted: (val) {
-          if (widget.onSubmitted != null) {
-            widget.onSubmitted!(val);
-          }
-        },
-        focusNode: widget.focusNode,
-        maxLines: widget.maxLines,
-        decoration: widget.icon != null || widget.info != null
-            ? InputDecoration(
-                suffixIcon: isLoading
-                    ? SizedBox(height: 6, width: 10, child: loadingPulse(40, indicatorColor: squareArtPrimary.v60))
-                    : widget.iconAlign == "right"
-                        ? widget.info != null
-                            ? null
-                            : InkWell(
-                                onTap: () async {
-                                  if (widget.ontapIcon != null) {
-                                    setState(() {
-                                      isLoading = true;
-                                    });
-                                    await widget.ontapIcon!();
-                                    setState(() {
-                                      isLoading = false;
-                                    });
-                                  }
-                                },
-                                child: Icon(
-                                  widget.icon ?? Icons.search,
-                                  color: widget.iconColor ?? squareartNeutral.v80,
-                                  size: 20,
-                                ))
+
+    return Stack(
+      alignment: AlignmentDirectional.bottomCenter,
+      children: [
+        SizedBox(
+          height: widget.height ?? 40,
+          width: widget.width ?? Get.width,
+          child: TextFormField(
+            onTap: widget.ontap ?? () {},
+            textAlign: widget.textAlign ?? TextAlign.start,
+            validator: widget.validator == null ? null : widget.validator!,
+            enabled: widget.isDisabled == null ? true : !widget.isDisabled!,
+            keyboardType: widget.type,
+            textCapitalization: widget.textCapitalization ?? TextCapitalization.none,
+            controller: widget.controller,
+            inputFormatters: formatted,
+            obscureText: false,
+            textInputAction: TextInputAction.done,
+            onChanged: (val) {
+              if (val.isEmpty) {
+                setState(() {
+                  isFieldEmpty = true;
+                });
+              } else {
+                setState(() {
+                  isFieldEmpty = false;
+                });
+              }
+              if (widget.onChanged != null) {
+                widget.onChanged!(val);
+              }
+            },
+            onFieldSubmitted: (val) {
+              if (widget.onSubmitted != null) {
+                widget.onSubmitted!(val);
+              }
+            },
+            focusNode: widget.focusNode,
+            maxLines: widget.maxLines,
+            decoration: widget.icon != null || widget.info != null
+                ? InputDecoration(
+                    suffixIcon: isLoading
+                        ? SizedBox(height: 6, width: 10, child: loadingPulse(40, indicatorColor: squareArtPrimary.v60))
+                        : widget.iconAlign == "right"
+                            ? widget.info != null
+                                ? null
+                                : InkWell(
+                                    onTap: () async {
+                                      if (widget.ontapIcon != null) {
+                                        setState(() {
+                                          isLoading = true;
+                                        });
+                                        await widget.ontapIcon!();
+                                        setState(() {
+                                          isLoading = false;
+                                        });
+                                      }
+                                    },
+                                    child: Icon(
+                                      widget.icon ?? Icons.search,
+                                      color: widget.iconColor ?? squareartNeutral.v80,
+                                      size: 20,
+                                    ))
+                            : null,
+                    prefixIcon: widget.iconAlign == "left"
+                        ? Icon(
+                            widget.icon ?? Icons.search,
+                            color: squareartNeutral.v80,
+                            size: 18,
+                          )
                         : null,
-                prefixIcon: widget.iconAlign == "left"
-                    ? Icon(
-                        widget.icon ?? Icons.search,
-                        color: squareartNeutral.v80,
-                        size: 18,
-                      )
-                    : null,
-                isDense: true,
-                enabledBorder: OutlineInputBorder(
-                  borderSide: widget.hideBorder ?? false ? BorderSide.none : BorderSide(color: squareartNeutral.v40),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                border: OutlineInputBorder(
-                  borderSide: widget.hideBorder ?? false ? BorderSide.none : const BorderSide(color: squareartSecondary100),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                labelStyle: TextStyle(color: squareartNeutral.v80, fontSize: 13),
-                hintText: widget.hintText,
-                hintStyle: hintStyle(),
-                focusedBorder: OutlineInputBorder(
-                    borderSide: widget.hideBorder ?? false ? BorderSide.none : const BorderSide(color: squareartSecondary100)),
-                errorText: widget.showError == null && isFieldEmpty
-                    ? 'Field cannot be empty.'
-                    : widget.showError != null && widget.showError!
-                        ? isFieldEmpty
-                            ? 'Field cannot be empty.'
-                            : null
-                        : null,
-              )
-            : InputDecoration(
-                filled: widget.isDisabled != null && widget.isDisabled! ? true : false,
-                fillColor: widget.isDisabled != null && widget.isDisabled! ? squareartNeutral.v30 : null,
-                alignLabelWithHint: true,
-                isDense: true,
-                enabledBorder: OutlineInputBorder(
-                  borderSide: widget.hideBorder ?? false ? BorderSide.none : BorderSide(color: squareartNeutral.v40),
-                  borderRadius: widget.radius == null ? BorderRadius.circular(8) : BorderRadius.circular(widget.radius!),
-                ),
-                border: OutlineInputBorder(
-                  borderSide: widget.hideBorder ?? false ? BorderSide.none : BorderSide(color: squareartNeutral.v40),
-                  borderRadius: widget.radius == null ? BorderRadius.circular(8) : BorderRadius.circular(widget.radius!),
-                ),
-                labelText: widget.labelText,
-                labelStyle: TextStyle(color: squareartNeutral.v80, fontSize: 13),
-                hintText: widget.hintText,
-                hintStyle: hintStyle(),
-                focusedBorder: OutlineInputBorder(
-                    borderSide: widget.hideBorder ?? false ? BorderSide.none : const BorderSide(color: squareartSecondary100)),
-                errorText: widget.showError == null && isFieldEmpty ? 'Field cannot be empty.' : null,
-              ),
-      ),
+                    isDense: true,
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: widget.hideBorder ?? false ? BorderSide.none : BorderSide(color: squareartNeutral.v40),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    border: OutlineInputBorder(
+                      borderSide: widget.hideBorder ?? false ? BorderSide.none : const BorderSide(color: squareartSecondary100),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    labelStyle: TextStyle(color: squareartNeutral.v80, fontSize: 13),
+                    hintText: widget.hintText,
+                    hintStyle: hintStyle(),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: widget.hideBorder ?? false ? BorderSide.none : const BorderSide(color: squareartSecondary100)),
+                    errorText: widget.showError == null && isFieldEmpty
+                        ? 'Field cannot be empty.'
+                        : widget.showError != null && widget.showError!
+                            ? isFieldEmpty
+                                ? 'Field cannot be empty.'
+                                : null
+                            : null,
+                  )
+                : InputDecoration(
+                    filled: widget.isDisabled != null && widget.isDisabled! ? true : false,
+                    fillColor: widget.isDisabled != null && widget.isDisabled! ? squareartNeutral.v30 : null,
+                    alignLabelWithHint: true,
+                    isDense: true,
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: widget.hideBorder ?? false ? BorderSide.none : BorderSide(color: squareartNeutral.v40),
+                      borderRadius: widget.radius == null ? BorderRadius.circular(8) : BorderRadius.circular(widget.radius!),
+                    ),
+                    border: OutlineInputBorder(
+                      borderSide: widget.hideBorder ?? false ? BorderSide.none : BorderSide(color: squareartNeutral.v40),
+                      borderRadius: widget.radius == null ? BorderRadius.circular(8) : BorderRadius.circular(widget.radius!),
+                    ),
+                    labelText: widget.labelText,
+                    labelStyle: TextStyle(color: squareartNeutral.v80, fontSize: 13),
+                    hintText: widget.hintText,
+                    hintStyle: hintStyle(),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: widget.hideBorder ?? false ? BorderSide.none : const BorderSide(color: squareartSecondary100)),
+                    errorText: widget.showError == null && isFieldEmpty ? 'Field cannot be empty.' : null,
+                  ),
+          ),
+        ),
+        if (widget.showErrorBorder ?? false)
+          Container(
+            width: (widget.width! * widget.errorBorderWidthPercentage!),
+            height: 1,
+            color: squareartError,
+          )
+      ],
     );
   }
 }
