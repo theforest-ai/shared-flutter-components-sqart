@@ -26,7 +26,6 @@ class DropdownInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 40,
       child: InputDecorator(
         decoration: InputDecoration(
             label: labelText == ""
