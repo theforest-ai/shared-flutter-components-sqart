@@ -40,7 +40,7 @@ class FullFilledButton extends StatelessWidget {
               width: isOutline! ? 1.0 : 0.0,
               color: isOutline! ? borderColor ?? squareartNeutral.v100 : borderColor ?? squareartNeutral.v100,
             ),
-            primary:  color ?? squareartNeutral.v100,
+            primary: color ?? squareartNeutral.v100,
             fixedSize: Size(width * .9, 40),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8.0),
@@ -50,17 +50,17 @@ class FullFilledButton extends StatelessWidget {
           children: [
             customText(buttonText!, 14, FontWeight.w500, isOutline! && color != null ? color! : textColor ?? squareartNeutral.v0,
                 maxLine: 2, textAlign: TextAlign.center),
-            horizontalSmallSpace,
-            isLoading!
-                ? SizedBox(
-                    width: 10,
-                    height: 10,
-                    child: CircularProgressIndicator(
-                      strokeWidth: 3.0,
-                      color: squareartNeutral.v0,
-                    ),
-                  )
-                : const SizedBox.shrink(),
+            if (isLoading ?? false) ...[
+              horizontalSmallSpace,
+              SizedBox(
+                width: 10,
+                height: 10,
+                child: CircularProgressIndicator(
+                  strokeWidth: 3.0,
+                  color: squareartNeutral.v0,
+                ),
+              )
+            ]
           ],
         ));
   }
