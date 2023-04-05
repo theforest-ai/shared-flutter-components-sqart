@@ -38,7 +38,7 @@ class FullFilledButton extends StatelessWidget {
             visualDensity: const VisualDensity(vertical: -2, horizontal: 1),
             side: BorderSide(
               width: isOutline! ? 1.0 : 0.0,
-              color: isOutline! ? borderColor ?? squareartNeutral.v100 : borderColor ?? squareartNeutral.v100,
+              color: borderColor ?? Colors.transparent
             ),
             primary: color ?? squareartNeutral.v100,
             fixedSize: Size(width * .9, 40),
