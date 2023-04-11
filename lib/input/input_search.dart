@@ -15,11 +15,13 @@ class SearchInput extends StatelessWidget {
     required this.onSubmit,
     this.onChanged,
     this.onTap,
-    this.cursorColor
+    this.cursorColor,
+    this.fillColor,
   }) : super(key: key);
 
   final double? radius;
   final bool? autoFocus;
+  final Color? fillColor;
   final bool? showRemoveIcon;
   final double? height;
   final TextEditingController controller;
@@ -44,6 +46,8 @@ class SearchInput extends StatelessWidget {
         focusNode: focusNode,
         cursorColor: cursorColor,
         decoration: InputDecoration(
+          fillColor: fillColor,
+          filled: fillColor != null,
           contentPadding: const EdgeInsets.all(0),
           focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(radius ?? 5.0)), borderSide: BorderSide(color: squareartNeutral.v100)),
