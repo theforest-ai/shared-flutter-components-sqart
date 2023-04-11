@@ -11,6 +11,7 @@ class DropdownInput extends StatelessWidget {
   final bool useCustomWidget;
   final Color? borderColor;
   final double? borderRadius;
+  final Widget? prefix;
   final Widget Function(String val)? customWidget;
 
   const DropdownInput(
@@ -21,6 +22,7 @@ class DropdownInput extends StatelessWidget {
       this.customWidget,
       this.borderColor,
       this.borderRadius,
+      this.prefix,
       this.useCustomWidget = false,
       this.initialValue})
       : super(key: key);
@@ -30,6 +32,7 @@ class DropdownInput extends StatelessWidget {
     return SizedBox(
       child: InputDecorator(
         decoration: InputDecoration(
+            prefix: prefix,
             label: labelText == ""
                 ? null
                 : Text(
@@ -39,7 +42,7 @@ class DropdownInput extends StatelessWidget {
                   ),
             contentPadding: const EdgeInsets.symmetric(horizontal: 10),
             enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(borderRadius??4.0),
+                borderRadius: BorderRadius.circular(borderRadius ?? 4.0),
                 borderSide: BorderSide(color: borderColor ?? squareartNeutral.v40, style: BorderStyle.solid))),
         child: DropdownButtonHideUnderline(
           child: DropdownButton2(
