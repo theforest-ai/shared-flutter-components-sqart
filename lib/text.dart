@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomText extends StatelessWidget {
-  CustomText(this.text, this.size, this.weight, this.color, {this.overflow, this.textAlign, this.maxLine});
+  CustomText(this.text, this.size, this.weight, this.color,
+      {this.overflow, this.textAlign, this.maxLine, this.letterSpacing, this.lineHeight});
 
   final String text;
   final double size;
@@ -11,6 +12,8 @@ class CustomText extends StatelessWidget {
   final TextOverflow? overflow;
   final TextAlign? textAlign;
   final int? maxLine;
+  final double? letterSpacing;
+  final double? lineHeight;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -18,8 +21,14 @@ class CustomText extends StatelessWidget {
         Text(text,
             textAlign: textAlign ?? TextAlign.start,
             maxLines: maxLine ?? 1,
-            style:  GoogleFonts.lato(
-          textStyle: TextStyle(fontWeight: weight, fontSize: size, color: color, overflow: overflow ?? TextOverflow.ellipsis))),
+            style: GoogleFonts.lato(
+                textStyle: TextStyle(
+                    letterSpacing: letterSpacing,
+                    height: lineHeight,
+                    fontWeight: weight,
+                    fontSize: size,
+                    color: color,
+                    overflow: overflow ?? TextOverflow.ellipsis))),
       ],
     );
   }
