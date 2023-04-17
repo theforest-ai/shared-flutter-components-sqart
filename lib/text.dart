@@ -47,6 +47,7 @@ class ClickableText extends StatelessWidget {
   final FontWeight weight;
   final double size;
   final Color color;
+  final FontStyle? fontStyle;
   const ClickableText({
     Key? key,
     required this.callback,
@@ -54,6 +55,7 @@ class ClickableText extends StatelessWidget {
     required this.weight,
     required this.size,
     required this.color,
+    this.fontStyle
   }) : super(key: key);
 
   @override
@@ -63,6 +65,6 @@ class ClickableText extends StatelessWidget {
         onTap: callback,
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,
-        child: CustomText(text, size, weight, color));
+        child: CustomText(text, size, weight, color, fontStyle: fontStyle,));
   }
 }
