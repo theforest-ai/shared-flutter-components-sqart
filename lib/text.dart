@@ -3,7 +3,12 @@ import 'package:google_fonts/google_fonts.dart';
 
 class CustomText extends StatelessWidget {
   CustomText(this.text, this.size, this.weight, this.color,
-      {this.overflow, this.textAlign, this.maxLine, this.letterSpacing, this.lineHeight});
+      {this.overflow,
+      this.textAlign,
+      this.maxLine,
+      this.letterSpacing,
+      this.lineHeight,
+      this.fontStyle});
 
   final String text;
   final double size;
@@ -14,6 +19,7 @@ class CustomText extends StatelessWidget {
   final int? maxLine;
   final double? letterSpacing;
   final double? lineHeight;
+  final FontStyle? fontStyle;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -27,6 +33,7 @@ class CustomText extends StatelessWidget {
                     height: lineHeight,
                     fontWeight: weight,
                     fontSize: size,
+                    fontStyle: fontStyle ?? FontStyle.normal,
                     color: color,
                     overflow: overflow ?? TextOverflow.ellipsis))),
       ],
