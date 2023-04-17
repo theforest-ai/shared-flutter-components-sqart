@@ -40,25 +40,24 @@ class CustomText extends StatelessWidget {
 
 class ClickableText extends StatelessWidget {
   final GestureTapCallback callback;
-  final String text;
-  final FontWeight weight;
-  final double size;
-  final Color color;
+  final String? text;
+  final FontWeight? weight;
+  final double? size;
+  final Color? color;
   final FontStyle? fontStyle;
   final CustomText? customText;
-  const ClickableText(
-      {Key? key,
-      required this.callback,
-      required this.text,
-      required this.weight,
-      required this.size,
-      required this.color,
-      this.fontStyle,
-      this.customText})
+  const ClickableText({Key? key, required this.callback, this.text, this.weight, this.size, this.color, this.fontStyle, this.customText})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    if (customText == null) {
+      assert(text != null);
+      assert(size != null);
+      assert(color != null);
+      assert(weight != null);
+    }
+
     return InkWell(
         key: key,
         onTap: callback,
@@ -66,10 +65,10 @@ class ClickableText extends StatelessWidget {
         highlightColor: Colors.transparent,
         child: customText ??
             CustomText(
-              text,
-              size,
-              weight,
-              color,
+              text!,
+              size!,
+              weight!,
+              color!,
               fontStyle: fontStyle,
             ));
   }
