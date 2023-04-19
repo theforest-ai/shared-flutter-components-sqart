@@ -34,40 +34,42 @@ class StandardTextInput extends StatefulWidget {
   final TextCapitalization? textCapitalization;
   final TextAlign? textAlign;
   final bool? showErrorBorder;
+  final bool? isNumberOnly;
   final double? errorBorderWidthPercentage;
 
-  const StandardTextInput({
-    Key? key,
-    this.labelText,
-    this.hintText,
-    this.focusNode,
-    this.width,
-    this.height,
-    this.type,
-    this.isDisabled,
-    this.isCard,
-    this.controller,
-    this.icon,
-    this.info,
-    this.iconAlign,
-    this.maxLines,
-    this.onChanged,
-    this.onSubmitted,
-    this.radius,
-    this.maxInput,
-    this.validator,
-    this.showError = false,
-    this.ontap,
-    this.showErrorBorder,
-    this.ontapIcon,
-    this.denySpace,
-    this.iconColor,
-    this.forceCaps,
-    this.hideBorder,
-    this.textAlign,
-    this.errorBorderWidthPercentage,
-    this.textCapitalization,
-  }) : super(key: key);
+  const StandardTextInput(
+      {Key? key,
+      this.labelText,
+      this.hintText,
+      this.focusNode,
+      this.width,
+      this.height,
+      this.type,
+      this.isDisabled,
+      this.isCard,
+      this.controller,
+      this.icon,
+      this.info,
+      this.iconAlign,
+      this.maxLines,
+      this.onChanged,
+      this.onSubmitted,
+      this.radius,
+      this.maxInput,
+      this.validator,
+      this.showError = false,
+      this.ontap,
+      this.showErrorBorder,
+      this.ontapIcon,
+      this.denySpace,
+      this.iconColor,
+      this.forceCaps,
+      this.hideBorder,
+      this.textAlign,
+      this.errorBorderWidthPercentage,
+      this.textCapitalization,
+      this.isNumberOnly})
+      : super(key: key);
 
   @override
   State<StandardTextInput> createState() => _StandardTextInputState();
@@ -102,6 +104,10 @@ class _StandardTextInputState extends State<StandardTextInput> {
     }
     if (widget.forceCaps ?? false) {
       formatted.add(UpperCaseTextFormatter());
+    }
+
+    if (widget.isNumberOnly ?? false) {
+      formatted.add(FilteringTextInputFormatter.allow(RegExp(r'[0-9]')));
     }
 
     return Stack(
@@ -188,9 +194,9 @@ class _StandardTextInputState extends State<StandardTextInput> {
                     hintStyle: hintStyle(),
                     focusedBorder: OutlineInputBorder(
                         borderSide: widget.hideBorder ?? false ? BorderSide.none : const BorderSide(color: squareartSecondary100)),
-                    errorText: widget.showError  && isFieldEmpty
+                    errorText: widget.showError && isFieldEmpty
                         ? 'Field cannot be empty.'
-                        : widget.showError  && widget.showError
+                        : widget.showError && widget.showError
                             ? isFieldEmpty
                                 ? 'Field cannot be empty.'
                                 : null
