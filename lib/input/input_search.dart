@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_flutter_components_sqart/constants/color.constant.dart';
-
-class SearchInput extends StatelessWidget {
+class SearchInput extends StatefulWidget {
   const SearchInput({
     Key? key,
     required this.controller,
@@ -17,11 +16,13 @@ class SearchInput extends StatelessWidget {
     this.onTap,
     this.cursorColor,
     this.fillColor,
+    this.underlineColorOnFocus,
   }) : super(key: key);
 
   final double? radius;
   final bool? autoFocus;
   final Color? fillColor;
+  final Color? underlineColorOnFocus;
   final bool? showRemoveIcon;
   final double? height;
   final TextEditingController controller;
@@ -34,48 +35,83 @@ class SearchInput extends StatelessWidget {
   final Color? cursorColor;
 
   @override
+  State<SearchInput> createState() => _SearchInputState();
+}
+
+class _SearchInputState extends State<SearchInput> {
+  @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: height ?? 50,
-      child: TextFormField(
-        onTap: onTap ?? () {},
-        autofocus: autoFocus ?? false,
-        onFieldSubmitted: onSubmit,
-        onChanged: onChanged ?? (v) {},
-        controller: controller,
-        focusNode: focusNode,
-        cursorColor: cursorColor,
-        decoration: InputDecoration(
-          fillColor: fillColor,
-          filled: fillColor != null,
-          contentPadding: const EdgeInsets.all(0),
-          focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(radius ?? 5.0)), borderSide: BorderSide(color: squareartNeutral.v100)),
-          enabledBorder: OutlineInputBorder(
-              gapPadding: .5,
-              borderSide: BorderSide(width: 2, color: squareartNeutral.v30),
-              borderRadius: BorderRadius.all(Radius.circular(radius ?? 8.0))),
-          hintText: placeholder,
-          prefixIcon: Icon(
-            Icons.search,
-            size: height == null ? 26 : 20,
-            color: squareartNeutral.v80,
-          ),
-          suffixIcon: showRemoveIcon == null || showRemoveIcon!
-              ? GestureDetector(
-                  onTap: onRemoveText ?? () {},
-                  child: Icon(
-                    Icons.close,
-                    size: 16,
+    return LayoutBuilder(builder: (context, constraints) {
+      return SizedBox(
+        height: widget.height ?? 50,
+        child: Stack(
+          children: [
+            FocusScope(
+              onFocusChange: (focus) {
+                if (widget.underlineColorOnFocus != null) {
+                  setState(() {});
+                }
+              },
+              child: TextFormField(
+                onTap: widget.onTap ?? () {},
+                autofocus: widget.autoFocus ?? false,
+                onFieldSubmitted: widget.onSubmit,
+                onChanged: widget.onChanged ?? (v) {},
+                controller: widget.controller,
+                focusNode: widget.focusNode,
+                cursorColor: widget.cursorColor,
+                decoration: InputDecoration(
+                  fillColor: widget.fillColor,
+                  filled: widget.fillColor != null,
+                  contentPadding: const EdgeInsets.all(0),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(widget.radius ?? 5.0)),
+                      borderSide: BorderSide(color: squareartNeutral.v100)),
+                  enabledBorder: OutlineInputBorder(
+                    gapPadding: .5,
+                    borderSide: BorderSide(width: 2, color: squareartNeutral.v30),
+                    borderRadius: BorderRadius.all(Radius.circular(widget.radius ?? 8.0)),
+                  ),
+                  hintText: widget.placeholder,
+                  prefixIcon: Icon(
+                    Icons.search,
+                    size: widget.height == null ? 26 : 20,
                     color: squareartNeutral.v80,
-                  ))
-              : null,
-          hintStyle: TextStyle(
-            color: squareartNeutral.v80,
-            fontSize: 15,
-          ),
+                  ),
+                  suffixIcon: widget.showRemoveIcon == null || widget.showRemoveIcon!
+                      ? GestureDetector(
+                          onTap: widget.onRemoveText ?? () {},
+                          child: Icon(
+                            Icons.close,
+                            size: 16,
+                            color: squareartNeutral.v80,
+                          ))
+                      : null,
+                  hintStyle: TextStyle(
+                    color: squareartNeutral.v80,
+                    fontSize: 15,
+                  ),
+                ),
+              ),
+            ),
+            if (widget.focusNode.hasFocus && widget.underlineColorOnFocus != null)
+              Positioned(
+                bottom: 0,
+                left: 2,
+                right: 2,
+                child: SizedBox(
+                  width: constraints.maxWidth * .9,
+                  child: Container(
+                    height: 3,
+                    decoration: BoxDecoration(
+                      color: widget.underlineColorOnFocus,
+                    ),
+                  ),
+                ),
+              )
+          ],
         ),
-      ),
-    );
+      );
+    });
   }
 }
