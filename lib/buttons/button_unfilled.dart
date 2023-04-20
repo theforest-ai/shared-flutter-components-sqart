@@ -11,6 +11,7 @@ class UnfilledButton extends StatelessWidget {
   final Color? borderColor;
   final Color? textColor;
   final double? textSize;
+  final double? height;
 
   const UnfilledButton({
     Key? key,
@@ -21,6 +22,7 @@ class UnfilledButton extends StatelessWidget {
     this.borderColor,
     this.textColor,
     this.textSize,
+    this.height
   }) : super(key: key);
 
   @override
@@ -28,6 +30,7 @@ class UnfilledButton extends StatelessWidget {
     return InkWell(
       onTap: onPressed,
       child: Container(
+        height: height,
         width: halfWidth != null
             ? halfWidth!
                 ? Get.width * .35
