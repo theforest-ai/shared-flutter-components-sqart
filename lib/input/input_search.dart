@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:shared_flutter_components_sqart/constants/color.constant.dart';
 class SearchInput extends StatefulWidget {
-  const SearchInput({
+  SearchInput({
     Key? key,
     required this.controller,
-    required this.focusNode,
+    this.focusNode,
     required this.placeholder,
     this.radius,
     this.showRemoveIcon,
@@ -17,6 +17,7 @@ class SearchInput extends StatefulWidget {
     this.cursorColor,
     this.fillColor,
     this.underlineColorOnFocus,
+    this.onFocusChanged,
   }) : super(key: key);
 
   final double? radius;
@@ -26,19 +27,30 @@ class SearchInput extends StatefulWidget {
   final bool? showRemoveIcon;
   final double? height;
   final TextEditingController controller;
-  final FocusNode focusNode;
+  FocusNode? focusNode;
   final String placeholder;
   final Function(String) onSubmit;
   final Function()? onRemoveText;
   final Function()? onTap;
   final Function(String)? onChanged;
   final Color? cursorColor;
+  Function(bool)? onFocusChanged;
 
   @override
   State<SearchInput> createState() => _SearchInputState();
 }
 
 class _SearchInputState extends State<SearchInput> {
+  var focus = FocusNode();
+
+  @override
+  void initState() {
+    if (widget.focusNode != null) {
+      focus = widget.focusNode!;
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
@@ -47,10 +59,12 @@ class _SearchInputState extends State<SearchInput> {
         child: Stack(
           children: [
             FocusScope(
-              onFocusChange: (focus) {
-                if (widget.underlineColorOnFocus != null) {
-                  setState(() {});
-                }
+              onFocusChange: (val) {
+                setState(() {
+                  if (widget.onFocusChanged != null) {
+                    widget.onFocusChanged!(focus.hasFocus);
+                  }
+                });
               },
               child: TextFormField(
                 onTap: widget.onTap ?? () {},
@@ -58,7 +72,7 @@ class _SearchInputState extends State<SearchInput> {
                 onFieldSubmitted: widget.onSubmit,
                 onChanged: widget.onChanged ?? (v) {},
                 controller: widget.controller,
-                focusNode: widget.focusNode,
+                focusNode: focus,
                 cursorColor: widget.cursorColor,
                 decoration: InputDecoration(
                   fillColor: widget.fillColor,
@@ -94,7 +108,7 @@ class _SearchInputState extends State<SearchInput> {
                 ),
               ),
             ),
-            if (widget.focusNode.hasFocus && widget.underlineColorOnFocus != null)
+            if (focus.hasFocus && widget.underlineColorOnFocus != null)
               Positioned(
                 bottom: 0,
                 left: 2,
