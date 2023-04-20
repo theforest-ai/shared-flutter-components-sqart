@@ -12,18 +12,20 @@ class UnfilledButton extends StatelessWidget {
   final Color? textColor;
   final double? textSize;
   final double? height;
+  final EdgeInsets? padding;
 
-  const UnfilledButton({
-    Key? key,
-    required this.buttonText,
-    required this.onPressed,
-    this.roundShape,
-    this.halfWidth,
-    this.borderColor,
-    this.textColor,
-    this.textSize,
-    this.height
-  }) : super(key: key);
+  const UnfilledButton(
+      {Key? key,
+      required this.buttonText,
+      required this.onPressed,
+      this.roundShape,
+      this.halfWidth,
+      this.borderColor,
+      this.textColor,
+      this.textSize,
+      this.padding,
+      this.height})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +38,7 @@ class UnfilledButton extends StatelessWidget {
                 ? Get.width * .35
                 : null
             : null,
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+        padding: padding ?? const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         decoration: BoxDecoration(
           color: squareartNeutral.v0,
           border: Border.all(color: borderColor == null ? squareartNeutral.v100 : borderColor!, width: 1, style: BorderStyle.solid),
