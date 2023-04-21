@@ -12,6 +12,7 @@ class FullFilledButton extends StatelessWidget {
   final Color? color;
   final Color? borderColor;
   final Color? textColor;
+  final Size? size;
   bool? isOutline = false;
   final EdgeInsets? padding;
   FullFilledButton({
@@ -25,6 +26,7 @@ class FullFilledButton extends StatelessWidget {
     this.borderColor,
     this.textColor,
     this.padding,
+    this.size
   }) : super(key: key);
 
   @override
@@ -36,12 +38,9 @@ class FullFilledButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
             padding: padding ?? const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             visualDensity: const VisualDensity(vertical: -2, horizontal: 1),
-            side: BorderSide(
-              width: isOutline! ? 1.0 : 0.0,
-              color: borderColor ?? Colors.transparent
-            ),
+            side: BorderSide(width: isOutline! ? 1.0 : 0.0, color: borderColor ?? Colors.transparent),
             primary: color ?? squareartNeutral.v100,
-            fixedSize: Size(width * .9, 40),
+            fixedSize: size??Size(width * .9, 40),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8.0),
             )),
