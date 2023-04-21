@@ -18,9 +18,7 @@ class CustomText extends StatelessWidget {
   final TextDecoration? decoration;
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(text,
+    return Text(text,
             textAlign: textAlign ?? TextAlign.start,
             maxLines: maxLine ?? 1,
             style: GoogleFonts.lato(
@@ -32,9 +30,7 @@ class CustomText extends StatelessWidget {
                     fontStyle: fontStyle ?? FontStyle.normal,
                     color: color,
                     decoration: decoration,
-                    overflow: overflow ?? TextOverflow.ellipsis))),
-      ],
-    );
+                    overflow: overflow ?? TextOverflow.ellipsis)));
   }
 }
 
