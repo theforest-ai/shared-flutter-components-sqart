@@ -19,7 +19,10 @@ class SearchInput extends StatefulWidget {
       this.fillColor,
       this.underlineColorOnFocus,
       this.onFocusChanged,
-      this.border})
+      this.enabledBorder,
+      this.disabledBorder,
+      this.focusedBorder,
+      })
       : super(key: key);
 
   final double? radius;
@@ -37,7 +40,9 @@ class SearchInput extends StatefulWidget {
   final Function(String)? onChanged;
   final Color? cursorColor;
   Function(bool)? onFocusChanged;
-  BorderSide? border;
+  BorderSide? enabledBorder;
+  BorderSide? disabledBorder;
+  BorderSide? focusedBorder;
 
   @override
   State<SearchInput> createState() => _SearchInputState();
@@ -83,13 +88,13 @@ class _SearchInputState extends State<SearchInput> {
                   contentPadding: const EdgeInsets.all(0),
                   disabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(widget.radius ?? 8)),
-                      borderSide: widget.border ?? BorderSide(color: squareartNeutral.v100)),
+                      borderSide: widget.disabledBorder ?? BorderSide(color: squareartNeutral.v100)),
                   focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(widget.radius ?? 8)),
-                      borderSide: widget.border ?? BorderSide(color: squareartNeutral.v100)),
+                      borderSide: widget.focusedBorder ?? BorderSide(color: squareartNeutral.v100)),
                   enabledBorder: OutlineInputBorder(
                     gapPadding: .5,
-                    borderSide: widget.border ?? BorderSide(width: 2, color: squareartNeutral.v30),
+                    borderSide: widget.enabledBorder ?? BorderSide(width: 2, color: squareartNeutral.v30),
                     borderRadius: BorderRadius.all(Radius.circular(widget.radius ?? 8.0)),
                   ),
                   hintText: widget.placeholder,
