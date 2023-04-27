@@ -2,28 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:shared_flutter_components_sqart/constants/color.constant.dart';
 
 class SearchInput extends StatefulWidget {
-  SearchInput(
-      {Key? key,
-      required this.controller,
-      this.focusNode,
-      required this.placeholder,
-      this.radius,
-      this.showRemoveIcon,
-      this.height,
-      this.onRemoveText,
-      this.autoFocus,
-      required this.onSubmit,
-      this.onChanged,
-      this.onTap,
-      this.cursorColor,
-      this.fillColor,
-      this.underlineColorOnFocus,
-      this.onFocusChanged,
-      this.enabledBorder,
-      this.disabledBorder,
-      this.focusedBorder,
-      })
-      : super(key: key);
+  SearchInput({
+    Key? key,
+    required this.controller,
+    this.focusNode,
+    required this.placeholder,
+    this.radius,
+    this.showRemoveIcon,
+    this.height,
+    this.onRemoveText,
+    this.autoFocus,
+    required this.onSubmit,
+    this.onChanged,
+    this.onTap,
+    this.cursorColor,
+    this.fillColor,
+    this.underlineColorOnFocus,
+    this.onFocusChanged,
+    this.enabledBorder,
+    this.disabledBorder,
+    this.focusedBorder,
+    this.underlineHeight
+  }) : super(key: key);
 
   final double? radius;
   final bool? autoFocus;
@@ -43,6 +43,7 @@ class SearchInput extends StatefulWidget {
   BorderSide? enabledBorder;
   BorderSide? disabledBorder;
   BorderSide? focusedBorder;
+  double? underlineHeight;
 
   @override
   State<SearchInput> createState() => _SearchInputState();
@@ -127,7 +128,7 @@ class _SearchInputState extends State<SearchInput> {
                 child: SizedBox(
                   width: constraints.maxWidth * .9,
                   child: Container(
-                    height: 3,
+                    height: widget.underlineHeight??2,
                     decoration: BoxDecoration(
                       color: widget.underlineColorOnFocus,
                     ),
