@@ -1,24 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:shared_flutter_components_sqart/constants/color.constant.dart';
+
 class SearchInput extends StatefulWidget {
-  SearchInput({
-    Key? key,
-    required this.controller,
-    this.focusNode,
-    required this.placeholder,
-    this.radius,
-    this.showRemoveIcon,
-    this.height,
-    this.onRemoveText,
-    this.autoFocus,
-    required this.onSubmit,
-    this.onChanged,
-    this.onTap,
-    this.cursorColor,
-    this.fillColor,
-    this.underlineColorOnFocus,
-    this.onFocusChanged,
-  }) : super(key: key);
+  SearchInput(
+      {Key? key,
+      required this.controller,
+      this.focusNode,
+      required this.placeholder,
+      this.radius,
+      this.showRemoveIcon,
+      this.height,
+      this.onRemoveText,
+      this.autoFocus,
+      required this.onSubmit,
+      this.onChanged,
+      this.onTap,
+      this.cursorColor,
+      this.fillColor,
+      this.underlineColorOnFocus,
+      this.onFocusChanged,
+      this.border})
+      : super(key: key);
 
   final double? radius;
   final bool? autoFocus;
@@ -35,6 +37,7 @@ class SearchInput extends StatefulWidget {
   final Function(String)? onChanged;
   final Color? cursorColor;
   Function(bool)? onFocusChanged;
+  BorderSide? border;
 
   @override
   State<SearchInput> createState() => _SearchInputState();
@@ -80,10 +83,10 @@ class _SearchInputState extends State<SearchInput> {
                   contentPadding: const EdgeInsets.all(0),
                   focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(widget.radius ?? 5.0)),
-                      borderSide: BorderSide(color: squareartNeutral.v100)),
+                      borderSide: widget.border ?? BorderSide(color: squareartNeutral.v100)),
                   enabledBorder: OutlineInputBorder(
                     gapPadding: .5,
-                    borderSide: BorderSide(width: 2, color: squareartNeutral.v30),
+                    borderSide: widget.border ?? BorderSide(width: 2, color: squareartNeutral.v30),
                     borderRadius: BorderRadius.all(Radius.circular(widget.radius ?? 8.0)),
                   ),
                   hintText: widget.placeholder,
