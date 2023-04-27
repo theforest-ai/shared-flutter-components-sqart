@@ -81,8 +81,11 @@ class _SearchInputState extends State<SearchInput> {
                   fillColor: widget.fillColor,
                   filled: widget.fillColor != null,
                   contentPadding: const EdgeInsets.all(0),
+                  disabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(widget.radius ?? 8)),
+                      borderSide: widget.border ?? BorderSide(color: squareartNeutral.v100)),
                   focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(widget.radius ?? 5.0)),
+                      borderRadius: BorderRadius.all(Radius.circular(widget.radius ?? 8)),
                       borderSide: widget.border ?? BorderSide(color: squareartNeutral.v100)),
                   enabledBorder: OutlineInputBorder(
                     gapPadding: .5,
