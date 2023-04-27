@@ -15,19 +15,21 @@ class FullFilledButton extends StatelessWidget {
   final Size? size;
   bool? isOutline = false;
   final EdgeInsets? padding;
-  FullFilledButton({
-    Key? key,
-    required this.buttonText,
-    required this.onPressed,
-    required this.isDisabled,
-    this.isLoading = false,
-    this.isOutline,
-    this.color,
-    this.borderColor,
-    this.textColor,
-    this.padding,
-    this.size
-  }) : super(key: key);
+  double? elevation;
+  FullFilledButton(
+      {Key? key,
+      required this.buttonText,
+      required this.onPressed,
+      required this.isDisabled,
+      this.isLoading = false,
+      this.isOutline,
+      this.color,
+      this.borderColor,
+      this.textColor,
+      this.padding,
+      this.size,
+      this.elevation})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,11 +38,12 @@ class FullFilledButton extends StatelessWidget {
     return ElevatedButton(
         onPressed: isDisabled! ? null : onPressed,
         style: ElevatedButton.styleFrom(
+            elevation: elevation,
             padding: padding ?? const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             visualDensity: const VisualDensity(vertical: -2, horizontal: 1),
             side: BorderSide(width: isOutline! ? 1.0 : 0.0, color: borderColor ?? Colors.transparent),
             primary: color ?? squareartNeutral.v100,
-            fixedSize: size??Size(width * .9, 40),
+            fixedSize: size ?? Size(width * .9, 40),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8.0),
             )),
