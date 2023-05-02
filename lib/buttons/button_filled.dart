@@ -9,7 +9,7 @@ class FilledButton extends StatefulWidget {
   final String? buttonText;
   final GestureTapCallback? onPressed;
   final bool? isDisabled;
-  final bool? roundShape;
+  final double? borderRadius;
   final bool? halfWidth;
   final Color? fillColor;
   final Color? textColor;
@@ -28,7 +28,7 @@ class FilledButton extends StatefulWidget {
     required this.buttonText,
     required this.onPressed,
     required this.isDisabled,
-    this.roundShape,
+    this.borderRadius,
     this.halfWidth,
     this.fillColor,
     this.textColor,
@@ -75,16 +75,8 @@ class _FilledButtonState extends State<FilledButton> {
                   color: widget.textColor ?? squareartNeutral.v100,
                 )
               : BorderSide.none,
-          shape: widget.roundShape != null
-              ? widget.roundShape!
-                  ? RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.0),
-                    )
-                  : RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                    )
-              : RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8.0),
+          shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(widget.borderRadius??8.0),
                 )),
       child: SizedBox(
         width: widget.halfWidth != null
