@@ -6,7 +6,6 @@ import 'package:shared_flutter_components_sqart/constants/styles.constant.dart';
 class UnfilledButton extends StatelessWidget {
   final String? buttonText;
   final GestureTapCallback? onPressed;
-  final bool? roundShape;
   final bool? halfWidth;
   final Color? borderColor;
   final Color? textColor;
@@ -19,7 +18,6 @@ class UnfilledButton extends StatelessWidget {
       {Key? key,
       required this.buttonText,
       required this.onPressed,
-      this.roundShape,
       this.halfWidth,
       this.borderColor,
       this.textColor,
