@@ -16,6 +16,7 @@ class FullFilledButton extends StatelessWidget {
   bool? isOutline = false;
   final EdgeInsets? padding;
   double? elevation;
+  double? borderRadius;
   FullFilledButton(
       {Key? key,
       required this.buttonText,
@@ -28,6 +29,7 @@ class FullFilledButton extends StatelessWidget {
       this.textColor,
       this.padding,
       this.size,
+      this.borderRadius,
       this.elevation})
       : super(key: key);
 
@@ -45,7 +47,7 @@ class FullFilledButton extends StatelessWidget {
             primary: color ?? squareartNeutral.v100,
             fixedSize: size ?? Size(width * .9, 40),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8.0),
+              borderRadius: BorderRadius.circular(borderRadius??8.0),
             )),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

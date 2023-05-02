@@ -13,6 +13,7 @@ class UnfilledButton extends StatelessWidget {
   final double? textSize;
   final double? height;
   final EdgeInsets? padding;
+  final  double? borderRadius;
 
   const UnfilledButton(
       {Key? key,
@@ -23,6 +24,7 @@ class UnfilledButton extends StatelessWidget {
       this.borderColor,
       this.textColor,
       this.textSize,
+      this.borderRadius,
       this.padding,
       this.height})
       : super(key: key);
@@ -42,11 +44,7 @@ class UnfilledButton extends StatelessWidget {
         decoration: BoxDecoration(
           color: squareartNeutral.v0,
           border: Border.all(color: borderColor == null ? squareartNeutral.v100 : borderColor!, width: 1, style: BorderStyle.solid),
-          borderRadius: roundShape != null
-              ? roundShape!
-                  ? BorderRadius.circular(20)
-                  : BorderRadius.circular(8)
-              : BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(borderRadius??8),
         ),
         child: Text(
           buttonText!,
