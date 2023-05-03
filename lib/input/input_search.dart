@@ -105,7 +105,8 @@ class _SearchInputState extends State<SearchInput> {
                     color: squareartNeutral.v80,
                   ),
                   suffixIcon: widget.showRemoveIcon == null || widget.showRemoveIcon!
-                      ? GestureDetector(
+                      ? InkWell(
+                          hoverColor: Colors.transparent,
                           onTap: widget.onRemoveText ?? () {},
                           child: Icon(
                             Icons.close,
