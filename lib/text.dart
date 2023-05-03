@@ -3,12 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class CustomText extends StatelessWidget {
   CustomText(this.text, this.size, this.weight, this.color,
-      {this.overflow,
-      this.textAlign,
-      this.maxLine,
-      this.letterSpacing,
-      this.lineHeight,
-      this.fontStyle});
+      {this.overflow, this.textAlign, this.maxLine, this.letterSpacing, this.lineHeight, this.decoration, this.fontStyle});
 
   final String text;
   final double size;
@@ -20,11 +15,10 @@ class CustomText extends StatelessWidget {
   final double? letterSpacing;
   final double? lineHeight;
   final FontStyle? fontStyle;
+  final TextDecoration? decoration;
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(text,
+    return Text(text,
             textAlign: textAlign ?? TextAlign.start,
             maxLines: maxLine ?? 1,
             style: GoogleFonts.lato(
@@ -35,34 +29,43 @@ class CustomText extends StatelessWidget {
                     fontSize: size,
                     fontStyle: fontStyle ?? FontStyle.normal,
                     color: color,
-                    overflow: overflow ?? TextOverflow.ellipsis))),
-      ],
-    );
+                    decoration: decoration,
+                    overflow: overflow ?? TextOverflow.ellipsis)));
   }
 }
 
 class ClickableText extends StatelessWidget {
   final GestureTapCallback callback;
-  final String text;
-  final FontWeight weight;
-  final double size;
-  final Color color;
-  const ClickableText({
-    Key? key,
-    required this.callback,
-    required this.text,
-    required this.weight,
-    required this.size,
-    required this.color,
-  }) : super(key: key);
+  final String? text;
+  final FontWeight? weight;
+  final double? size;
+  final Color? color;
+  final FontStyle? fontStyle;
+  final CustomText? customText;
+  const ClickableText({Key? key, required this.callback, this.text, this.weight, this.size, this.color, this.fontStyle, this.customText})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    if (customText == null) {
+      assert(text != null);
+      assert(size != null);
+      assert(color != null);
+      assert(weight != null);
+    }
+
     return InkWell(
         key: key,
         onTap: callback,
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,
-        child: CustomText(text, size, weight, color));
+        child: customText ??
+            CustomText(
+              text!,
+              size!,
+              weight!,
+              color!,
+              fontStyle: fontStyle,
+            ));
   }
 }
