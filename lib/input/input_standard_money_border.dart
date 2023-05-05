@@ -24,7 +24,7 @@ class StandardMoneyBorderInput extends StatefulWidget {
   final Function(String)? onSubmitted;
   bool showError;
   final Color? prefixIconColor;
-  final Widget? suffix;
+  final Widget? suffixIcon;
 
   StandardMoneyBorderInput({
     Key? key,
@@ -46,7 +46,7 @@ class StandardMoneyBorderInput extends StatefulWidget {
     this.radius,
     this.maxInput,
     this.prefixIconColor,
-    this.suffix
+    this.suffixIcon
   }) : super(key: key);
 
   @override
@@ -100,7 +100,7 @@ class _StandardMoneyBorderInputState extends State<StandardMoneyBorderInput> {
           labelStyle: TextStyle(color: squareartNeutral.v80, fontSize: 13),
           hintText: widget.hintText,
           hintStyle: hintStyle(),
-          suffix: widget.suffix,
+          suffixIcon: widget.suffixIcon,
           prefixIcon: Icon(
             Icons.attach_money,
             color: widget.prefixIconColor??squareArtSecondary.v100,
