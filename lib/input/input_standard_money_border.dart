@@ -23,6 +23,8 @@ class StandardMoneyBorderInput extends StatefulWidget {
   final Function(String)? onChanged;
   final Function(String)? onSubmitted;
   bool showError;
+  final Color? prefixIconColor;
+  final Widget? suffix;
 
   StandardMoneyBorderInput({
     Key? key,
@@ -43,6 +45,8 @@ class StandardMoneyBorderInput extends StatefulWidget {
     this.onSubmitted,
     this.radius,
     this.maxInput,
+    this.prefixIconColor,
+    this.suffix
   }) : super(key: key);
 
   @override
@@ -96,9 +100,10 @@ class _StandardMoneyBorderInputState extends State<StandardMoneyBorderInput> {
           labelStyle: TextStyle(color: squareartNeutral.v80, fontSize: 13),
           hintText: widget.hintText,
           hintStyle: hintStyle(),
+          suffix: widget.suffix,
           prefixIcon: Icon(
             Icons.attach_money,
-            color: squareArtSecondary.v100,
+            color: widget.prefixIconColor??squareArtSecondary.v100,
           ),
           errorText: isFieldEmpty && widget.showError ? 'Field cannot be empty.' : null,
         ),
