@@ -59,6 +59,7 @@ class ClickableText extends StatelessWidget {
         onTap: callback,
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,
+        hoverColor: Colors.transparent,
         child: customText ??
             CustomText(
               text!,
