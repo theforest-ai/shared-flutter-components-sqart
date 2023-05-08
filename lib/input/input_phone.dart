@@ -43,6 +43,7 @@ class PhoneInput extends StatelessWidget {
                 hideMainText: false,
                 showFlagMain: false,
                 showFlag: true,
+                showDropDownButton: true,
                 initialSelection: initialCountry == null ? 'sg' : initialCountry!,
                 hideSearch: false,
                 searchDecoration: InputDecoration(
@@ -83,7 +84,7 @@ class PhoneInput extends StatelessWidget {
                     borderSide: BorderSide(color: squareartNeutral.v40),
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  labelText: isOptional ? "Phone Number (optional)" : "Phone Number",
+                  labelText: isOptional ? "Phone Number (optional)" : "",
                   labelStyle: TextStyle(color: squareartNeutral.v80, fontSize: 13),
                   hintText: "Phone Number",
                   hintStyle: hintStyle(),
