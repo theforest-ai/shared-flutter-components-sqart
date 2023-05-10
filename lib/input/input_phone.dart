@@ -30,7 +30,7 @@ class PhoneInput extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Flexible(
-            flex: 1,
+            flex: 2,
             child: Container(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
