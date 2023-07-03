@@ -3,7 +3,7 @@ import 'package:shared_flutter_components_sqart/constants/color.constant.dart';
 import 'package:shared_flutter_components_sqart/constants/styles.constant.dart';
 
 // ignore: must_be_immutable
-class FullFilledButton extends StatelessWidget {
+class FullFilledButtonNew extends StatelessWidget {
   final String? buttonText;
   final GestureTapCallback? onPressed;
   final bool? isDisabled;
@@ -12,7 +12,7 @@ class FullFilledButton extends StatelessWidget {
   final Color? textColor;
   bool? isOutline = false;
   final EdgeInsets? padding;
-  FullFilledButton({
+  FullFilledButtonNew({
     Key? key,
     required this.buttonText,
     required this.onPressed,
